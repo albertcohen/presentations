@@ -1,0 +1,95 @@
+\mode<presentation>
+
+\newif\ifbeamer@secheader
+\beamer@secheaderfalse
+
+\DeclareOptionBeamer{secheader}{\beamer@secheadertrue}
+\ProcessOptionsBeamer
+
+\useinnertheme[shadow]{rounded}
+%\useinnertheme{rounded}
+\useoutertheme{default}
+%\useoutertheme{infolines}
+%\usecolortheme{rose}
+%\usecolortheme{dolphin}
+\usefonttheme{structurebold}
+
+\usesubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{blue}$\blacktriangleright$}%
+}
+\usesubsubitemizeitemtemplate{%
+    \tiny\raise1.5pt\hbox{\color{green}$\blacktriangleright$}%
+}
+
+\setbeamersize{text margin left=1em,text margin right=1em}
+
+\setbeamertemplate{navigation symbols}{}
+
+\ifbeamer@secheader
+
+\defbeamertemplate*{headline}{infolines theme without institution}
+{
+  %% Section.
+  \hbox{%
+    \begin{beamercolorbox}[wd=0.7\paperwidth,ht=2.25ex,dp=1.125ex,left]{Section in header}%
+      \hspace*{2ex}%
+      \color{blue}{\if0\thesection\relax\else\thesection.~\fi\insertsection}%
+      \color{olive}{\if0\thesubsection\relax\else~--~\insertsubsection\fi}%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.3\paperwidth,ht=2.25ex,dp=1.125ex,right]{Section in header}%
+    \end{beamercolorbox}%
+  }
+
+  %% Separation bar.
+  \hbox{%
+    \begin{beamercolorbox}[wd=1\paperwidth,ht=0.005ex,dp=0.0125ex,left]{Bar}%
+    \end{beamercolorbox}%
+  }
+  \vskip0pt%
+}
+
+\else
+
+\setbeamertemplate{headline}[default]
+
+\fi
+
+%% Set the footer for further pages.
+\defbeamertemplate*{footline}{infolines theme without institution}
+{
+  %% Section.
+  \hbox{%
+%%     \begin{beamercolorbox}[wd=.90\paperwidth,ht=2.25ex,dp=1.125ex,left]{Title in footer}%
+%%       \usebeamerfont{Test font}{toto} %\insertshorttitle
+%%     \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.8\paperwidth,ht=2.25ex,dp=1.125ex,left]{Section in header}%
+%       \insertdate ~~-~~2nd HiPEAC Industrial Workshop %/ \inserttotalframenumber %\hspace*{2ex}
+      \smallskip
+    \end{beamercolorbox}%
+%%     \begin{beamercolorbox}[wd=0.7\paperwidth,ht=2.25ex,dp=1.125ex,left]{Section in header}%
+%%       \insertshorttitle %/ \inserttotalframenumber %\hspace*{2ex}
+%%       \medskip
+%%     \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=0.2\paperwidth,ht=2.25ex,dp=1.125ex,right]{Section in header}%
+      \insertframenumber{}\,/\,\inserttotalframenumber\hspace*{2ex}
+      \smallskip
+    \end{beamercolorbox}%
+  }
+}
+
+\AtBeginSection{\begin{frame}{\thesection.~\color{olive}\insertsection}
+    \tableofcontents[currentsection,%
+    sectionstyle=show/shaded,%
+    subsectionstyle=show/show/hide]
+  \end{frame}}
+
+\AtBeginSubsection{\begin{frame}{\thesection.~\color{olive}\insertsection}
+    \tableofcontents[currentsubsection,%
+    sectionstyle=hide/hide,%
+    subsectionstyle=show/shaded/hide]
+  \end{frame}}
+
+\boldmath
+
+\mode
+<all>

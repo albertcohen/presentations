@@ -1,0 +1,18 @@
+As parallelism permeate through all computing devices, the need to
+provide productivity-oriented programming models to exploit these
+architectures increases.  High-level languages can express
+(in)dependence and data locality without reference to any particular
+hardware.  Compilers and runtime systems are left with the
+responsibility of lowering these abstractions to well-orchestrated
+threads and memory management.  Our approach combines programming
+language, compiler and runtime system design, based on the data-flow
+model of computation.  We will present the productivity, the
+portability, the scalability and the efficiency advantages of such a
+combination.  In particular, we will demonstrate how data-flow
+execution reduces the severity of the memory wall while preserving a
+modular and deterministic model for compatible with modern software
+engineering.  We will also show how to embed determinstic data-flow
+computations into a traditional imperative language, preserving its
+excellent single-thread performance with explicit memory management.
+We will present experimental results based on free software prototypes
+embedded in GCC, targetting multiprocessors and GPU accelerators.

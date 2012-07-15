@@ -1,0 +1,106 @@
+\documentclass[a4paper]{article}
+
+\usepackage{graphics,amsmath,fullpage}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+\section{A data-flow runtime}
+
+\begin{enumerate}
+\item Download the archive \texttt{dfruntime.tar.gz} from the course's
+  web site.  It supports the TStar data-driven execution model
+  described in the course.
+
+\item Compile the library and run the test example on a GNU/Linux
+  distribution with gcc 4.4 or later; there are a few warnings related
+  with GOMP, gcc's OpenMP implementation.
+
+\item Understand as much of the code as possible.
+  
+  The part of the code with the \texttt{GOMP}-prefixed function calls
+  is a rather convoluted and non-portable way to wrap all the
+  \texttt{main()} function of a C program into an OpenMP
+  \texttt{parallel} region.
+
+  The pragma syntax \texttt{\#pragma omp task} marks the next
+  statement/block for concurrent execution as an OpenMP task. Using
+  this syntax, the implementation of \texttt{tdecrease()} immediately
+  spawns the dependent task when its synchronization counter reaches
+  0.  The underlying OpenMP runtime deals with the scheduling of
+  independent tasks, whose semantics is very similar to Cilk threads.
+
+\item Starting from the following sequential implementation of the
+  merge-sort algorithm, take inspiration from the test example of the
+  data-flow runtime to write a parallel data-flow version of the
+  merge-sort algorithm.
+
+\begin{verbatim}
+extern int garray[200000];
+
+extern int merge(int, int, int, int, int);
+
+int m_sort(int left, int right)
+{
+  int mid;
+  int a, b, d, f;
+
+  if (right <= left)
+      return 0;
+
+  mid = (right + left) / 2;
+  a = m_sort(left, mid);
+  b = m_sort(mid+1, right);
+
+  f = merge(a, b, left, mid+1, right);
+
+  return f;
+}
+
+int main ()
+{
+  int i = 1;
+  int size = sizeof (garray)/sizeof(garray[0]);
+
+  i = m_sort (i-1, size-1);
+}
+\end{verbatim}
+
+\end{enumerate}
+
+\section{Scheduling}
+
+\begin{enumerate}
+\item Download the manual and source code for Cilk 5.4.6 from
+  \texttt{http://supertech.csail.mit.edu/cilk}
+
+\item Write a parallel Cilk implementation of the matrix product
+  realizing $\mathcal{O}(n^3)$ operations but with a critical path of
+  $\mathcal{O}(\log n)$.
+
+\item Look at more examples from the \texttt{examples/} directory of
+  Cilk 5.4.6.
+
+\item Download the paper on work-stealing by Blumofe and Leiserson
+  from the course's web site.
+
+\item Read Section 3 and understand the proofs.
+
+\item Sketch an example of a Cilk program whose sequential execution
+  uses a bounded amount of memory, but where an ad-hoc scheduling
+  strategy uses an amount of memory proportional to the number of
+  instances of a given task.
+
+\item Read the example, discussion and different design choices about
+  cactus stacks in Cilk and Intel's TBB:
+
+  \texttt{http://software.intel.com/en-us/articles/the-thorny-problem-of-the-cactus-stack}
+
+\item Vector Fabrics' vfTasks is a simple task library supporting
+  inter-task dependences, with a control flow semantics (as opposed to
+  the data-driven semantics of the data-flow runtime above):
+
+  \texttt{http://sourceforge.net/projects/vftasks}
+\end{enumerate}
+
+\end{document}

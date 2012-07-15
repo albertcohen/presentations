@@ -1,0 +1,36 @@
+* Title:
+
+Polyhedral Compilation Off the Beaten Path
+
+* Abstract:
+
+The polyhedral model is a powerful framework for automatic
+optimization and parallelization.  Programs are represented using
+systems of affine (linear) inequalities, allowing to construct and
+search for advanced loop optimizations.  This model is now mature and
+reaches production compilers.
+
+In this talk, we will survey ongoing work to extend the reach of the
+polyhedral model. From dynamic, data-dependent control flow, to
+task-level optimization of parallel programs, through hardware
+accelerators and domain-specific languages.
+
+* Bio:
+
+Albert Cohen is a senior research scientist at INRIA and a part-time
+associate professor at École Polytechnique, Paris, France. He
+graduated from École Normale Supérieure de Lyon, and received his PhD
+from the University of Versailles in 1999 (awarded two national
+prizes). He has been a visiting scolar at the University of Illinois
+in 2000 and 2001, and an invited professor at Philips Research then
+NXP, Eindhoven.
+
+Albert Cohen works on optimizing compilers for high-performance and
+embedded systems, automatic parallelization, and parallel data-flow
+and synchronous programming. He coauthored more than 80 papers in
+refereed journals and international conferences, and he is or has been
+the advisor for 16 PhD theses. He served in the program committees of
+the major conferences in the field, and has been the general chair of
+HiPEAC 2012.  Albert Cohen is particularly interested in research
+projects resulting in the effective transfer of advanced compilation
+techniques to production compilers.
